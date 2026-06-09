@@ -1,0 +1,8 @@
+.login-form-wrapper {
+    min-height: 100vh;
+    color:#fff ;
+    font-size: 18px;
+}
+.login-form-wrapper button:disabled{
+   cursor: not-allowed;
+}

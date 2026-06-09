@@ -1,0 +1,84 @@
+<div class="container d-flex flex-column justify-content-center align-items-center registeration-form-wrapper py-4">
+    <h1 class="text-center cst-font-3 my-2">Add New Employee</h1>
+    <div class="col-lg-6 col-md-12 mx-auto cst-bg-1 p-4 rounded">
+        <form [formGroup]="employeeRegisterForm">
+            <label class="d-block">Name<span class="text-danger">*</span> :</label>
+            <input class="d-block w-100 rounded border-0 p-2 mt-1" type="text" formControlName="fname"
+                placeholder="John Doe">
+            @if((employeeRegisterForm.controls['fname'].touched || employeeRegisterForm.controls['fname'].dirty)&&
+            employeeRegisterForm.controls['fname'].errors?.['required']){
+            <p class="text-white">Name is required.</p>
+            }
+            <label class="d-block mt-3">Email<span class="text-danger">*</span> :</label>
+            <input class="d-block w-100 rounded border-0 p-2 mt-1" type="email" formControlName="email"
+                placeholder="john9@gmail.com">
+            @if((employeeRegisterForm.controls['email'].touched || employeeRegisterForm.controls['email'].dirty) &&
+            employeeRegisterForm.controls['email'].errors?.['required']){
+            <p class="text-white">Email is required.</p>
+            }
+            @else if (employeeRegisterForm.controls['email'].errors?.['email']) {
+            <p class="text-white">Enter valid email.</p>
+            }
+            <label class="d-block mt-3">Phone<span class="text-danger">*</span> :</label>
+            <input class="d-block w-100 rounded border-0 p-2 mt-1" type="text" formControlName="phone"
+                placeholder="Enter you active phone number.">
+            @if((employeeRegisterForm.controls['phone'].touched || employeeRegisterForm.controls['phone'].dirty) &&
+            employeeRegisterForm.controls['phone'].errors?.['required']){
+            <p class="text-white">Phone is required.</p>
+            }
+            @else if (employeeRegisterForm.controls['phone'].errors?.['minlength']){
+            <p class="text-white">Phone length should be minimum 10 character.</p>
+            }
+            @else if (employeeRegisterForm.controls['phone'].errors?.['maxlength']){
+            <p class="text-white">Phone length should be maximum 10 character.</p>
+            }
+            @else if (employeeRegisterForm.controls['phone'].errors?.['pattern']){
+            <p class="text-white">Phone number must contain numbers only(no spaces, dashes, or letters) </p>
+            }
+            <label class="d-block w-100 mt-3">Department<span class="text-danger">*</span> :</label>
+            <select class="d-block w-100 rounded border-0 p-2 mt-1" formControlName="department">
+                @for(dept of departments; track dept.id){
+                <option [value]="dept.id" >{{dept.departmentName}}</option>
+                }
+            </select>
+            @if((employeeRegisterForm.controls['department'].touched ||
+            employeeRegisterForm.controls['department'].dirty) &&
+            employeeRegisterForm.controls['department'].errors?.['required']){
+            <p class="text-white">Department is required.</p>
+            }
+
+            <label class="d-block w-100 mt-3">Joining Date<span class="text-danger">*</span> :</label>
+            <input class="d-block w-100 rounded border-0 p-2 mt-1" type="date" formControlName="joiningDate"
+                placeholder="Enter you active phone number.">
+            @if((employeeRegisterForm.controls['joiningDate'].touched || employeeRegisterForm.controls['joiningDate'].dirty)&& employeeRegisterForm.controls['joiningDate'].errors?.['required']){
+                <p class="text-white">Joining date is required.</p>
+            }
+            <label class="d-block w-100 mt-3">Address<span class="text-danger">*</span> :</label>
+            <input class="d-block w-100 rounded border-0 p-2 mt-1" type="text" formControlName="address"
+                placeholder="Pune">
+            @if((employeeRegisterForm.controls['address'].touched || employeeRegisterForm.controls['address'].dirty)&& employeeRegisterForm.controls['address'].errors?.['required']){
+                <p class="text-white">Joining date is required.</p>
+            }
+            <label class="d-block w-100 mt-3">Role<span class="text-danger">*</span> :</label>
+            <select class="d-block w-100 rounded border-0 p-2 mt-1" formControlName="role">
+                <option value="Team Leader">Team Leader</option>
+                <option value="Manager">Manager</option>
+                <option value="Assistant Manager">Assistent Manager</option>
+                <option value="Junior Developer">Junior Developer</option>
+                <option value="Senior Developer">Senior Developer</option>
+            </select>
+            @if((employeeRegisterForm.controls['role'].touched || employeeRegisterForm.controls['role'].dirty) &&
+            employeeRegisterForm.controls['role'].errors?.['required']){
+            <p class="text-white">Role is required.</p>
+            }
+            <label class="d-block mt-3">Gender<span class="text-danger">*</span> :</label>
+            <label>Male </label>
+            <input type="radio" class="ms-2" formControlName="gender" value="male">
+            <br>
+            <label>Female </label>
+            <input type="radio" class="ms-2" formControlName="gender" value="female">
+            <button class="d-block w-100 py-2 border-0 rounded cst-bg-2 text-white fw-bold mt-4"
+                [disabled]="employeeRegisterForm.invalid" (click)="onAddEmployee()">Add New Employee </button>
+        </form>
+    </div>
+</div>

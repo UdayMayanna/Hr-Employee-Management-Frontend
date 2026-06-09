@@ -1,0 +1,8 @@
+.hr-registeration-form-wrapper {
+    min-height: 100vh;
+    color:#fff ;
+    font-size: 18px;
+}
+.hr-registeration-form-wrapper button:disabled{
+   cursor: not-allowed;
+}

@@ -1,0 +1,9 @@
+.emp-table-wrapper{
+    overflow: auto;
+}
+.emp-table{
+    width: 100vw;
+}
+.emp-cst-col{
+    width: 200px;
+}

@@ -1,0 +1,34 @@
+body{
+    background: black !important;
+    font-family: 'Courier New', Courier, monospace !important;
+}
+.cst-bg-1 {
+    background-color: #ffffff36;
+}
+.cst-bg-2 {
+    background-image: linear-gradient(45deg, #fb6e06, #ffca00fa);
+}
+.cst-font-1{
+  color: #ffca00fa;
+}
+.cst-font-3{
+  background: linear-gradient(45deg, #fb6e06, #ffca00fa);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  font-weight: bold;
+}
+.nav-link{
+  cursor: pointer;
+  font-size: 18px;
+}
+.nav-link:hover{
+  color: #ffca00fa !important;
+}
+.cst-search-btn{
+    right: 0;
+}
+i.action-btn{
+  cursor: pointer;
+}

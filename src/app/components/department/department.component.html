@@ -1,0 +1,51 @@
+<div class="conatiner-fluid p-4">
+    <div class="d-flex justify-content-between">
+        <div class="search-box w-75 position-relative">
+            <input type="text" class="w-100 py-2 px-3 rounded border-0 cst-bg-1 text-white"
+                placeholder="Enter department name to search.">
+            <i class="bi bi-search position-absolute text-white cst-bg-2 py-2 px-3 rounded cst-search-btn"></i>
+        </div>
+        <button class="cst-bg-2 py-2 px-3 rounded border-0 text-white fw-bold ms-3" (click)="onClickTogleForm()">
+            <i class="bi bi-building"></i> Add New Department</button>
+    </div>
+    @if(isShowDepartmentForm){
+    <div class="department-registeration-form-wrapper rounded mt-2 py-2 px-3 pb-3">
+        <form #deptForm="ngForm" class="d-flex align-items-end flex-wrap" (ngSubmit)="onAddDepartment(deptForm)">
+            <div class="w-50">
+                <label class="text-white">Enter Department Name :</label><br>
+                <input class="rounded border-0 p-2 mt-1 w-100" name="departmentName" ngModel required #departmentName="ngModel" type="text"
+                    placeholder="React Developers">
+            </div>
+            <button class="cst-bg-2 py-2 px-3 rounded border-0 text-white fw-bold ms-3" [disabled]="deptForm.invalid">
+                <i class="bi bi-building"></i> Add New Department</button>
+            @if(departmentName.touched && departmentName.errors?.['required']){
+            <p class="text-white w-100 m-0 mt-1">Department name is required.</p>
+            }
+        </form>
+    </div>
+    }
+
+    <table class="table mt-3 rounded border-0 cst-bg-2">
+        <thead>
+            <tr class="rounded">
+                <th class="bg-transparent text-white">Sr.No</th>
+                <th class="bg-transparent text-white">Department ID</th>
+                <th class="bg-transparent text-white">Department Name</th>
+                <th class="bg-transparent text-white">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for(dept of departments;track dept.id; let i = $index){
+            <tr>
+                <td>{{i+1}}</td>
+                <td>{{dept.id}}</td>
+                <td>{{dept.departmentName}}</td>
+                <td>
+                    <i class="bi bi-trash p-2 rounded text-white cst-bg-2"></i>
+                    <i class="bi bi-pen ms-1 p-2 rounded text-white cst-bg-2"></i>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,30 @@
+<div class="container d-flex flex-column justify-content-center align-items-center login-form-wrapper py-4">
+    <h1 class="text-center cst-font-3 my-2">Login</h1>
+    <div class="col-lg-6 col-md-12 mx-auto cst-bg-1 p-4 rounded">
+        <form [formGroup]="employeeLoginForm">
+            <label class="d-block mt-3">Email :</label>
+            <input class="d-block w-100 rounded border-0 p-2 mt-1" type="email" formControlName="email"
+                placeholder="john9@gmail.com">
+            @if((employeeLoginForm.controls['email'].touched || employeeLoginForm.controls['email'].dirty) && employeeLoginForm.controls['email'].errors?.['required']){
+                <p class="text-white">Email is required.</p>
+            }
+            @else if (employeeLoginForm.controls['email'].errors?.['email']) {
+                <p class="text-white">Enter valid email.</p>
+            }
+            <label class="d-block mt-3">Password :</label>
+            <input class="d-block w-100 rounded border-0 p-2 mt-1" type="password" formControlName="password"
+                placeholder="......">
+            @if((employeeLoginForm.controls['password'].touched || employeeLoginForm.controls['password'].dirty) && employeeLoginForm.controls['password'].errors?.['required']){
+                <p class="text-white">Password is required</p>
+            }
+            @else if(employeeLoginForm.controls['password'].errors?.['minlength']){
+                <p class="text-white">Password must be longer than 8 characters.</p>
+            }
+            @else if(employeeLoginForm.controls['password'].errors?.['maxlength']){
+                <p class="text-white">Password must be shorter than 12 characters.</p>
+            }
+            <button class="d-block w-100 py-2 border-0 rounded cst-bg-2 text-white fw-bold mt-4" [disabled]="employeeLoginForm.invalid" (click)="onLogin()">Login</button>
+            <p class="text-center mt-2">Don't have account? <a [routerLink]="['/hr-register']" class="cst-font-1 text-decoration-none">Register</a></p>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,50 @@
+<div class="conatiner-fluid p-4">
+    <div class="d-flex justify-content-between">
+        <div class="search-box w-75 position-relative">
+            <input type="text" class="w-100 py-2 px-3 rounded border-0 cst-bg-1 text-white"
+                placeholder="Enter employee name to search.">
+            <i class="bi bi-search position-absolute text-white cst-bg-2 py-2 px-3 rounded cst-search-btn"></i>
+        </div>
+        <button class="cst-bg-2 py-2 px-3 rounded border-0 text-white fw-bold ms-3" routerLink="/dashboard/add-employee">
+            <i class="bi bi-person-plus"></i> Add Employee</button>
+    </div>
+    <div class="emp-table-wrapper">
+        <table class="table mt-3 rounded border-0 cst-bg-2 emp-table">
+            <thead>
+                <tr class="rounded">
+                    <th class="bg-transparent text-white">Sr.No</th>
+                    <th class="bg-transparent text-white">ID</th>
+                    <th class="bg-transparent text-white emp-cst-col">Name</th>
+                    <th class="bg-transparent text-white">Email</th>
+                    <th class="bg-transparent text-white">Pone</th>
+                    <th class="bg-transparent text-white">Gender</th>
+                    <th class="bg-transparent text-white emp-cst-col">Role</th>
+                    <th class="bg-transparent text-white">Department</th>
+                    <th class="bg-transparent text-white emp-cst-col">J. Date</th>
+                    <th class="bg-transparent text-white emp-cst-col">Address</th>
+                    <th class="bg-transparent text-white emp-cst-col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for(employee of employees;track employee;let i = $index){
+                <tr>
+                    <td>{{i+1}}</td>
+                    <td>{{employee.empid}}</td>
+                    <td>{{employee.fname}}</td>
+                    <td>{{employee.email}}</td>
+                    <td>{{employee.phone}}</td>
+                    <td>{{employee.gender}}</td>
+                    <td>{{employee.role}}</td>
+                    <td>{{employee.department.departmentName}}</td>
+                    <td>{{employee.joiningDate}}</td>
+                    <td>{{employee.address}}</td>
+                    <td>
+                        <i class="bi bi-trash p-2 rounded text-white cst-bg-2 action-btn" (click)="onDelete(employee.empid)"></i>
+                        <i class="bi bi-pen ms-1 p-2 rounded text-white cst-bg-2 action-btn" (click)="onUpdate(employee.empid)"></i>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

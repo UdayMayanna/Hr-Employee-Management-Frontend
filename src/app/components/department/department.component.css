@@ -1,0 +1,7 @@
+.department-registeration-form-wrapper {
+    font-size: 18px;
+    border: 2px solid orange;
+}
+.department-registeration-form-wrapper button:disabled{
+   cursor: not-allowed;
+}

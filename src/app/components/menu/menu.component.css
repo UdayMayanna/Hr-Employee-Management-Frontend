@@ -1,0 +1,8 @@
+.left-menu{
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+.menu-item{
+    border:2px solid #b7b7b76b;
+    cursor: pointer;
+}
