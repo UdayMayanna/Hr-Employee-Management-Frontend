@@ -19,7 +19,7 @@ export const routes: Routes = [
             { path: 'department', component: DepartmentComponent },
             { path: 'profile', component: ProfileComponent },
             { path: 'add-employee', component: RegisterComponent },
-            { path: 'update-employee', component: RegisterComponent },
+            { path: 'update-employee/:id', component: RegisterComponent },
             { path :'update-hr',component:HrRegisterComponent},
             { path: '', redirectTo: 'overview', pathMatch: 'full' }
         ],canActivate : [authGuard]

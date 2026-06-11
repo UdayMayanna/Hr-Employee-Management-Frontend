@@ -36,6 +36,6 @@ export class EmployeeComponent {
   }
 
   onUpdate(emp_id:number){
-    this.router.navigate(['/dashboard/add-employee'])
+    this.router.navigate(['/dashboard/update-employee',emp_id])
   }
 }

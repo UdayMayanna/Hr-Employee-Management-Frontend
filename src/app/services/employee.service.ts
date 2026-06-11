@@ -29,4 +29,8 @@ export class EmployeeService {
   updateEmployee(emp_id:number,employee:employee){
     return this.http.put("http://localhost:8080/employee/"+emp_id+"/",employee);
   }
+  
+  getSingleEmployee(emp_id:number){
+    return this.http.get<employee>("http://localhost:8080/employee/single/"+emp_id+"/");
+  }
 }

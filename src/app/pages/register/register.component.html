@@ -77,8 +77,16 @@
             <br>
             <label>Female </label>
             <input type="radio" class="ms-2" formControlName="gender" value="female">
+            @if (employeeId>0) {
             <button class="d-block w-100 py-2 border-0 rounded cst-bg-2 text-white fw-bold mt-4"
                 [disabled]="employeeRegisterForm.invalid" (click)="onAddEmployee()">Add New Employee </button>
+
+            }
+            @else{
+                        <button class="d-block w-100 py-2 border-0 rounded cst-bg-2 text-white fw-bold mt-4"
+                [disabled]="employeeRegisterForm.invalid" (click)="onUpdateEmployee()">Update Employee </button>
+
+            }
         </form>
     </div>
 </div>

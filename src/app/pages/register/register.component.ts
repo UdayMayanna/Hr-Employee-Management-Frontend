@@ -1,10 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HrServiceService } from '../../services/hr-service.service';
 import { EmployeeService } from '../../services/employee.service';
 import { DepartmentService } from '../../services/department.service';
+import { employee } from '../../models/employee';
 
 @Component({
   selector: 'app-register',
@@ -13,6 +14,9 @@ import { DepartmentService } from '../../services/department.service';
   styleUrl: './register.component.css'
 })
 export class RegisterComponent {
+
+  employeeId!: number ;
+
   employeeRegisterForm: FormGroup = new FormGroup({
     fname: new FormControl("", [Validators.required]),
     email: new FormControl("", [Validators.email, Validators.required]),
@@ -25,7 +29,7 @@ export class RegisterComponent {
     address: new FormControl("", [Validators.required])
   })
 
-  constructor(private empService: EmployeeService, private depSer: DepartmentService,private router:Router) { }
+  constructor(private empService: EmployeeService, private depSer: DepartmentService, private router: Router, private route: ActivatedRoute) { }
 
   loggedHr: any;
   departments: any[] = [];
@@ -37,19 +41,40 @@ export class RegisterComponent {
     this.depSer.getAllDepartments(this.loggedHr.hrId).subscribe((result: any) => {
       this.departments = result;
     })
+
+    const idParam = this.route.snapshot.paramMap.get('id');
+
+    if (idParam) {
+      const toUpdateId = Number(idParam);
+
+      this.empService.getSingleEmployee(toUpdateId).subscribe((result: employee) => {
+        if (result) {
+          this.employeeRegisterForm.patchValue({
+            fname: result.fname,
+            email: result.email,
+            phone: result.phone,
+            gender: result.gender,
+            department: result.department.departmentName,
+            role: result.role,
+            joiningDate: result.joiningDate,
+            address: result.address
+          });
+        }
+      });
+    }
   }
 
   onAddEmployee() {
 
-  const deptId = Number(this.employeeRegisterForm.value.department);
+    const deptId = Number(this.employeeRegisterForm.value.department);
 
-  const employeeData = {
-    ...this.employeeRegisterForm.value
-  };
+    const employeeData = {
+      ...this.employeeRegisterForm.value
+    };
 
-  delete employeeData.department;
+    delete employeeData.department;
 
-  this.empService
+    this.empService
       .onAddEmployee(employeeData, deptId)
       .subscribe({
         next: (result) => {
@@ -71,6 +96,19 @@ export class RegisterComponent {
         }
       });
 
-}
+  }
+  onUpdateEmployee() {
+    this.empService.updateEmployee(this.employeeId,this.employeeRegisterForm.value).subscribe({
+      next:(result)=>{
+        alert("Employee details updated successfully.");
+        this.employeeRegisterForm.reset();
+        this.router.navigate(['/dashboard/employee']);
+      },
+      error:(err)=>{
+        console.log(err);
+        alert("Failed to update employee details.");
+      }
+    })  
+  }
 
 }
