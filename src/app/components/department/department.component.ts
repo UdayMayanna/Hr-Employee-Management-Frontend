@@ -39,4 +39,12 @@ export class DepartmentComponent {
    onClickTogleForm(){
     this.isShowDepartmentForm = !this.isShowDepartmentForm;
    }
+   onDeleteDepartment(dept_id:number){
+     this.depService.deleteDepartment(dept_id).subscribe((result:any)=>{
+      if(result){
+        alert(result.message);
+        this.ngOnInit();
+      }
+     })
+   }
 }

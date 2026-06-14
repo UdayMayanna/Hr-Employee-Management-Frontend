@@ -19,4 +19,8 @@ export class DepartmentService {
   getDepartmentCount(hrId:number){
     return this.http.get("http://localhost:8080/department/count/"+hrId+"/");
   }
+
+  deleteDepartment(dept_id:number){
+    return this.http.delete<string>("http://localhost:8080/department/"+dept_id+"/");
+  }
 }

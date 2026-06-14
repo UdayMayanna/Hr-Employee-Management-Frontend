@@ -2,14 +2,14 @@
     <div class="d-flex justify-content-between">
         <div class="search-box w-75 position-relative">
             <input type="text" class="w-100 py-2 px-3 rounded border-0 cst-bg-1 text-white"
-                placeholder="Enter employee name to search.">
+                placeholder="Enter employee name to search." (input)="employeeResults()" [(ngModel)]="serachInput">
             <i class="bi bi-search position-absolute text-white cst-bg-2 py-2 px-3 rounded cst-search-btn"></i>
         </div>
         <button class="cst-bg-2 py-2 px-3 rounded border-0 text-white fw-bold ms-3" routerLink="/dashboard/add-employee">
             <i class="bi bi-person-plus"></i> Add Employee</button>
     </div>
-    <div class="emp-table-wrapper">
-        <table class="table mt-3 rounded border-0 cst-bg-2 emp-table">
+    <div class="emp-table-wrapper mt-3">
+        <table class="table rounded border-0 cst-bg-2 emp-table">
             <thead>
                 <tr class="rounded">
                     <th class="bg-transparent text-white">Sr.No</th>

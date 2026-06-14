@@ -15,7 +15,7 @@ import { employee } from '../../models/employee';
 })
 export class RegisterComponent {
 
-  employeeId!: number ;
+  employeeId: number = 0 ;
 
   employeeRegisterForm: FormGroup = new FormGroup({
     fname: new FormControl("", [Validators.required]),
@@ -46,7 +46,7 @@ export class RegisterComponent {
 
     if (idParam) {
       const toUpdateId = Number(idParam);
-
+      this.employeeId = toUpdateId;
       this.empService.getSingleEmployee(toUpdateId).subscribe((result: employee) => {
         if (result) {
           this.employeeRegisterForm.patchValue({

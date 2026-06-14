@@ -41,7 +41,7 @@
                 <td>{{dept.id}}</td>
                 <td>{{dept.departmentName}}</td>
                 <td>
-                    <i class="bi bi-trash p-2 rounded text-white cst-bg-2"></i>
+                    <i class="bi bi-trash p-2 rounded text-white cst-bg-2" (click)="onDeleteDepartment(dept.id)"></i>
                     <i class="bi bi-pen ms-1 p-2 rounded text-white cst-bg-2"></i>
                 </td>
             </tr>
