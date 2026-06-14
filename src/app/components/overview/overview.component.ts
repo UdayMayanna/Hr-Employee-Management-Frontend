@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
 import { EmployeeService } from '../../services/employee.service';
 import { dashboardStats } from '../../models/dashboard-stats';
-import { json } from 'stream/consumers';
-import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-overview',
-  imports: [JsonPipe],
+  imports: [],
   templateUrl: './overview.component.html',
   styleUrl: './overview.component.css'
 })

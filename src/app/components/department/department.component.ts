@@ -10,12 +10,17 @@ import { FormsModule } from '@angular/forms';
 })
 export class DepartmentComponent {
 
+  searchInput : string = '';
+
   loggedInHr : any;
   departments : any[] = [];
   index:number=0;
+  isShowDepartmentForm:boolean=false;
+  toUpdateDepartmentId:number=0;
+  departmentToUpdate:string = "";
+
   constructor(private depService : DepartmentService){}
 
-   isShowDepartmentForm:boolean=false;
    ngOnInit(){
      const hrData = JSON.parse(localStorage.getItem('loggedInHr')!);
      if(hrData){
@@ -37,6 +42,8 @@ export class DepartmentComponent {
     console.log(deptForm)
    }
    onClickTogleForm(){
+    this.toUpdateDepartmentId = 0;
+     this.departmentToUpdate = "";
     this.isShowDepartmentForm = !this.isShowDepartmentForm;
    }
    onDeleteDepartment(dept_id:number){
@@ -46,5 +53,35 @@ export class DepartmentComponent {
         this.ngOnInit();
       }
      })
+   }
+
+   searchDepartment(){
+    if(this.searchInput == ''){
+      this.ngOnInit()
+    }
+      this.depService.serchDepartment(this.searchInput).subscribe((result:any)=>{
+        if(result){
+          this.departments = result;
+        }
+      })
+   }
+
+   updateDepartmentForm(dept_id:number){
+    this.isShowDepartmentForm = true;
+    this.toUpdateDepartmentId=dept_id;
+    this.depService.getSingleDepartment(dept_id).subscribe((result:any)=>{
+      if(result){
+             this.departmentToUpdate = result.departmentName;
+      }
+    })
+   }
+
+   updateDepartment(updatedDept:any,){
+        this.depService.updateDepartment(updatedDept.value,this.toUpdateDepartmentId).subscribe((result:any)=>{
+          if(result){
+            alert(result.message);
+            this.ngOnInit();
+          }
+        })
    }
 }

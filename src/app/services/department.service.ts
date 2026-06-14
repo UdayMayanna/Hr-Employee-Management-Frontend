@@ -23,4 +23,16 @@ export class DepartmentService {
   deleteDepartment(dept_id:number){
     return this.http.delete<string>("http://localhost:8080/department/"+dept_id+"/");
   }
+
+  serchDepartment(query:string){
+    return this.http.get("http://localhost:8080/department/search/"+query+"/");
+  }
+
+  getSingleDepartment(dept_id:number){
+    return this.http.get("http://localhost:8080/department/single/"+dept_id+"/");
+  }
+  
+  updateDepartment(department:any,toUpdateDepartmentId:number){
+    return this.http.put("http://localhost:8080/department/"+toUpdateDepartmentId+"/",department);
+  }
 }

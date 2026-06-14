@@ -10,7 +10,7 @@ export class HrServiceService {
   constructor(private http:HttpClient){}
 
   registerHR(Data:Hr){ 
-    return this.http.post("http://localhost:8080/hr",Data);
+    return this.http.post("http://localhost:8080/hr/",Data);
   }
 
    loginHr(email : string,password : string){

@@ -2,7 +2,7 @@
     <div class="d-flex justify-content-between">
         <div class="search-box w-75 position-relative">
             <input type="text" class="w-100 py-2 px-3 rounded border-0 cst-bg-1 text-white"
-                placeholder="Enter department name to search.">
+                placeholder="Enter department name to search." [(ngModel)]="searchInput" (input)="searchDepartment()">
             <i class="bi bi-search position-absolute text-white cst-bg-2 py-2 px-3 rounded cst-search-btn"></i>
         </div>
         <button class="cst-bg-2 py-2 px-3 rounded border-0 text-white fw-bold ms-3" (click)="onClickTogleForm()">
@@ -10,14 +10,20 @@
     </div>
     @if(isShowDepartmentForm){
     <div class="department-registeration-form-wrapper rounded mt-2 py-2 px-3 pb-3">
-        <form #deptForm="ngForm" class="d-flex align-items-end flex-wrap" (ngSubmit)="onAddDepartment(deptForm)">
+        <form #deptForm="ngForm" class="d-flex align-items-end flex-wrap">
             <div class="w-50">
                 <label class="text-white">Enter Department Name :</label><br>
-                <input class="rounded border-0 p-2 mt-1 w-100" name="departmentName" ngModel required #departmentName="ngModel" type="text"
-                    placeholder="React Developers">
+                <input class="rounded border-0 p-2 mt-1 w-100" name="departmentName" required #departmentName="ngModel" type="text"
+                    placeholder="React Developers" [(ngModel)]="departmentToUpdate">
             </div>
-            <button class="cst-bg-2 py-2 px-3 rounded border-0 text-white fw-bold ms-3" [disabled]="deptForm.invalid">
+            @if(toUpdateDepartmentId == 0){
+              <button class="cst-bg-2 py-2 px-3 rounded border-0 text-white fw-bold ms-3" [disabled]="deptForm.invalid" (click)="onAddDepartment(deptForm)">
                 <i class="bi bi-building"></i> Add New Department</button>
+            }
+            @else {
+                <button class="cst-bg-2 py-2 px-3 rounded border-0 text-white fw-bold ms-3" [disabled]="deptForm.invalid" (click)="updateDepartment(deptForm)">
+                <i class="bi bi-building"></i> Update Department</button>
+            }
             @if(departmentName.touched && departmentName.errors?.['required']){
             <p class="text-white w-100 m-0 mt-1">Department name is required.</p>
             }
@@ -42,7 +48,7 @@
                 <td>{{dept.departmentName}}</td>
                 <td>
                     <i class="bi bi-trash p-2 rounded text-white cst-bg-2" (click)="onDeleteDepartment(dept.id)"></i>
-                    <i class="bi bi-pen ms-1 p-2 rounded text-white cst-bg-2"></i>
+                    <i class="bi bi-pen ms-1 p-2 rounded text-white cst-bg-2" (click)="updateDepartmentForm(dept.id)"></i>
                 </td>
             </tr>
             }
