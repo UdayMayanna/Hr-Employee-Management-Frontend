@@ -26,8 +26,8 @@ export class EmployeeService {
     return this.http.delete("http://localhost:8080/employee/"+emp_id+"/");
   }
 
-  updateEmployee(emp_id:number,employee:employee){
-    return this.http.put("http://localhost:8080/employee/"+emp_id+"/",employee);
+  updateEmployee(emp_id:number,dept_id:number,employee:employee){
+    return this.http.put("http://localhost:8080/employee/"+emp_id+"/"+dept_id+"/",employee);
   }
   
   getSingleEmployee(emp_id:number){

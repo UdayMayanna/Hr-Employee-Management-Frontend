@@ -98,7 +98,15 @@ export class RegisterComponent {
 
   }
   onUpdateEmployee() {
-    this.empService.updateEmployee(this.employeeId,this.employeeRegisterForm.value).subscribe({
+    const employeeData = {
+      ...this.employeeRegisterForm.value
+    };
+    const dept_id = employeeData.department;
+    delete employeeData.department;
+    const idParam = this.route.snapshot.paramMap.get('id');
+    if(idParam){
+      const toUpdateId = Number(idParam);
+    this.empService.updateEmployee(toUpdateId,dept_id,employeeData).subscribe({
       next:(result)=>{
         alert("Employee details updated successfully.");
         this.employeeRegisterForm.reset();
@@ -110,5 +118,5 @@ export class RegisterComponent {
       }
     })  
   }
-
+  }
 }
