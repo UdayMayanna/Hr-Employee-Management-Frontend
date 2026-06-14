@@ -17,12 +17,14 @@ export class EmployeeComponent {
   deleteMsg : string = "";
 
   serachInput : string = ""
+
+  private loggedInHr : any ;
   constructor(private empSer : EmployeeService,private router : Router){}
 
   ngOnInit(){
-    const data = JSON.parse(localStorage.getItem('loggedInHr')!);
-    if(data){
-      this.empSer.getAllEmployees(data.hrId).subscribe((result:employee[])=>{
+    this.loggedInHr = JSON.parse(localStorage.getItem('loggedInHr')!);
+    if(this.loggedInHr){
+      this.empSer.getAllEmployees(this.loggedInHr.hrId).subscribe((result:employee[])=>{
         if(result){
           this.employees = result;
         }
@@ -45,7 +47,7 @@ export class EmployeeComponent {
     if(this.serachInput === ''){
       this.ngOnInit();
     }
-    this.empSer.getEmployeesBySearch(this.serachInput).subscribe((result:employee[])=>{
+    this.empSer.getEmployeesBySearch(this.serachInput,this.loggedInHr.hrId).subscribe((result:employee[])=>{
       if(result){
         this.employees = result;
       }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { DepartmentService } from '../../services/department.service';
 import { FormsModule } from '@angular/forms';
+import { department } from '../../models/departments';
 
 @Component({
   selector: 'app-department',
@@ -13,7 +14,7 @@ export class DepartmentComponent {
   searchInput : string = '';
 
   loggedInHr : any;
-  departments : any[] = [];
+  departments : department[] = [];
   index:number=0;
   isShowDepartmentForm:boolean=false;
   toUpdateDepartmentId:number=0;
@@ -27,7 +28,7 @@ export class DepartmentComponent {
       this.loggedInHr = hrData;
      }
      
-     this.depService.getAllDepartments(this.loggedInHr.hrId).subscribe((result: any) => {
+     this.depService.getAllDepartments(this.loggedInHr.hrId).subscribe((result : department[]) => {
       this.departments = result;
     })
    }
@@ -59,7 +60,7 @@ export class DepartmentComponent {
     if(this.searchInput == ''){
       this.ngOnInit()
     }
-      this.depService.serchDepartment(this.searchInput).subscribe((result:any)=>{
+      this.depService.serchDepartment(this.searchInput,this.loggedInHr.hrId).subscribe((result:any)=>{
         if(result){
           this.departments = result;
         }
@@ -69,7 +70,7 @@ export class DepartmentComponent {
    updateDepartmentForm(dept_id:number){
     this.isShowDepartmentForm = true;
     this.toUpdateDepartmentId=dept_id;
-    this.depService.getSingleDepartment(dept_id).subscribe((result:any)=>{
+    this.depService.getSingleDepartment(dept_id).subscribe((result:department)=>{
       if(result){
              this.departmentToUpdate = result.departmentName;
       }

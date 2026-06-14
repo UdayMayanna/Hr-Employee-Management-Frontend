@@ -34,7 +34,7 @@ export class EmployeeService {
     return this.http.get<employee>("http://localhost:8080/employee/single/"+emp_id+"/");
   }
 
-  getEmployeesBySearch(search:string){
-    return this.http.get<employee[]>("http://localhost:8080/employee/search/"+search+"/");
+  getEmployeesBySearch(search:string,hrId:number){
+    return this.http.get<employee[]>("http://localhost:8080/employee/search/"+search+"/"+hrId);
   }
 }
