@@ -8,10 +8,12 @@ import { dashboardStats } from '../models/dashboard-stats';
 })
 export class EmployeeService {
 
+  private baseUrl = "http://localhost:8080/employee";
+
   constructor(private http : HttpClient) { }
 
   onAddEmployee(employee:any,dept_id:number){
-    return this.http.post("http://localhost:8080/employee/"+dept_id+"/",employee);
+    return this.http.post(this.baseUrl+"/"+dept_id+"/",employee);
   }
 
   getAllEmployees(hr_id:number){
